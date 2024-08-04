@@ -1,8 +1,10 @@
 {
-  "name": "Discord_Bot_v14_Template",
+  "name": "discord_bot_v14_template",
+  "displayName": "Discord Bot v14 Template",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A Discord.js Bot v14 Template",
+  "exports": "./index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
