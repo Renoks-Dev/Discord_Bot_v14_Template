@@ -34,7 +34,21 @@ Copy and rename `.env-example` to `.env` and fill out the values of your Discord
 ```
 
 ## Commands
-1. /ping
+
+### Fun
+1. `/flip`
+   - Flips a coin.
+
+### Information
+1. `/avatar`
+   - Display your avatar or another user's avatar.
+2. `/serverinfo`
+   - Display some of the server's information.
+3. `/userinfo`
+   - Display some user information about your account or another user's account.
+
+### Utility
+1. `/ping`
    - Bot replies with pong!
 
 ## Deployment
