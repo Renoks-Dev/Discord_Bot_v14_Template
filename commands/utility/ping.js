@@ -5,5 +5,10 @@ export const data = new SlashCommandBuilder()
   .setDescription("Replies with Pong!");
 
 export async function execute(interaction) {
-  await interaction.reply("Pong!");
+  await interaction.deferReply({ ephemeral: true });
+
+  await interaction.editReply({
+    content: `🌐 The ping of the bot: ${interaction.client.ws.ping}!`,
+    ephemeral: true,
+  });
 }
