@@ -35,6 +35,10 @@ Copy and rename `.env-example` to `.env` and fill out the values of your Discord
 
 ## Commands
 
+### Design
+1. `/randomcolor`
+   - Generates a random color in HEX, RGB and HSL.
+
 ### Fun
 1. `/flip`
    - Flips a coin.
