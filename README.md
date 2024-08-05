@@ -38,6 +38,8 @@ Copy and rename `.env-example` to `.env` and fill out the values of your Discord
 ### Fun
 1. `/flip`
    - Flips a coin.
+2. `/roll`
+   - Roll a dice.
 
 ### Information
 1. `/avatar`
