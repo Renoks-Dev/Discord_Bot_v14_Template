@@ -12,11 +12,11 @@
   "author": "Renoks",
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^14.15.3",
+    "discord.js": "^14.16.3",
     "dotenv": "^16.4.5"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.7"
   },
   "engines": {
     "node": ">=20"
