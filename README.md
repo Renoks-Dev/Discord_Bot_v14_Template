@@ -61,10 +61,10 @@ Copy and rename `.env-example` to `.env` and fill out the values of your Discord
 You can deploy your slash commands globally or to a specific guild.
 
 ### Deploy Slash Commands Globally
-- Run `node deploy-commands-global.js`.
+- Run `npm run deploy-commands-global`.
 - After it is finished, the commands should be updated in all guilds the bot is in.
 
 ### Deploy Slash Commands to a Specific Guild
 - Fill in your **GUILD_ID** in `.env` file.
-- Run `node deploy-commands-guild.js`.
+- Run `npm run deploy-commands-guild`.
 - After it is finished, the commands should be updated in all guilds the bot is in.
