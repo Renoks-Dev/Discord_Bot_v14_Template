@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
 
 const commands = [];
 // Grab all the command folders from the commands directory you created earlier
-const foldersPath = join(__dirname, "commands");
+const foldersPath = join(__dirname, "src/commands");
 const commandFolders = readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
