@@ -11,7 +11,7 @@ const __dirname = dirname(__filename);
 
 const commands = [];
 // Grab all the command folders from the commands directory you created earlier
-const foldersPath = join(__dirname, "src/commands");
+const foldersPath = join(__dirname, "commands");
 const commandFolders = readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
@@ -45,9 +45,12 @@ const rest = new REST().setToken(process.env.TOKEN);
       `Started refreshing ${commands.length} application (/) commands.`
     );
 
-    // The put method is used to fully refresh all commands globally with the current set
+    // The put method is used to fully refresh all commands in the guild with the current set
     const data = await rest.put(
-      Routes.applicationCommands(process.env.CLIENT_ID),
+      Routes.applicationGuildCommands(
+        process.env.CLIENT_ID,
+        process.env.GUILD_ID
+      ),
       { body: commands }
     );
 

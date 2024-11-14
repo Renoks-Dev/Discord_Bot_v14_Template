@@ -14,7 +14,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.commands = new Collection();
 
 (async () => {
-  const commandsFolderPath = join(__dirname, "src/commands");
+  const commandsFolderPath = join(__dirname, "commands");
   const commandFolders = readdirSync(commandsFolderPath);
 
   for (const folder of commandFolders) {
@@ -39,7 +39,7 @@ client.commands = new Collection();
     }
   }
 
-  const eventsPath = join(__dirname, "src/events");
+  const eventsPath = join(__dirname, "events");
   const eventFiles = readdirSync(eventsPath).filter((file) =>
     file.endsWith(".js")
   );

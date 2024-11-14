@@ -3,11 +3,11 @@
   "displayName": "Discord Bot v14 Template",
   "version": "1.0.0",
   "description": "A Discord.js Bot v14 Template",
-  "exports": "./index.js",
+  "exports": "./src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node ./index.js",
-    "dev": "nodemon ./index.js"
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
   },
   "author": "Renoks",
   "license": "ISC",
