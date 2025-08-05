@@ -1,18 +1,19 @@
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder } from 'discord.js';
+import logger from '../../utils/logger.js';
 
 export const data = new SlashCommandBuilder()
-  .setName("roll")
-  .setDescription("Roll a specified number of dice.")
-  .addIntegerOption((option) =>
+  .setName('roll')
+  .setDescription('Roll a specified number of dice.')
+  .addIntegerOption(option =>
     option
-      .setName("sides")
-      .setDescription("Number of sides on the dice.")
+      .setName('sides')
+      .setDescription('Number of sides on the dice.')
       .setRequired(true)
   )
-  .addIntegerOption((option) =>
+  .addIntegerOption(option =>
     option
-      .setName("dice")
-      .setDescription("Number of dice to roll.")
+      .setName('dice')
+      .setDescription('Number of dice to roll.')
       .setRequired(true)
   );
 
@@ -23,9 +24,9 @@ export async function execute(interaction) {
     const { options, user } = interaction;
 
     const userId = user.id;
-    const sides = options.getInteger("sides");
-    const dice = options.getInteger("dice");
-    let results = [];
+    const sides = options.getInteger('sides');
+    const dice = options.getInteger('dice');
+    const results = [];
     let total = 0;
 
     for (let i = 0; i < dice; i++) {
@@ -36,10 +37,10 @@ export async function execute(interaction) {
 
     await interaction.editReply({
       content: `<@${userId}> - 🎲 You rolled: ${results.join(
-        ", "
+        ', '
       )} (Total: ${total})`,
     });
   } catch (error) {
-    console.error(error);
+    logger.error('Error in roll command:', error);
   }
 }
