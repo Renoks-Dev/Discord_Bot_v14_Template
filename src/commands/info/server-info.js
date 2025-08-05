@@ -1,8 +1,9 @@
-import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import logger from '../../utils/logger.js';
 
 export const data = new SlashCommandBuilder()
-  .setName("serverinfo")
-  .setDescription("Display information about this server.");
+  .setName('serverinfo')
+  .setDescription('Display information about this server.');
 
 export async function execute(interaction) {
   try {
@@ -12,34 +13,34 @@ export async function execute(interaction) {
     const owner = await guild.fetchOwner();
 
     const embed = new EmbedBuilder()
-      .setColor("Blurple")
+      .setColor('Blurple')
       .setTitle(`${guild.name}`)
       .setThumbnail(guild.iconURL({ dynamic: true }))
       .addFields(
-        { name: "Server ID", value: guild.id.toString(), inline: true },
+        { name: 'Server ID', value: guild.id.toString(), inline: true },
         {
-          name: "Owner",
+          name: 'Owner',
           value: `<@${owner.id}>`,
           inline: true,
         },
-        { name: "Members", value: `${guild.memberCount}`, inline: true },
+        { name: 'Members', value: `${guild.memberCount}`, inline: true },
         {
-          name: "Created At",
+          name: 'Created At',
           value: `${guild.createdAt.toDateString()}`,
           inline: true,
         },
         {
-          name: "Verification Level",
+          name: 'Verification Level',
           value: `${guild.verificationLevel}`,
           inline: true,
         },
         {
-          name: "Boost Level",
-          value: guild.premiumTier ? `Tier ${guild.premiumTier}` : "None",
+          name: 'Boost Level',
+          value: guild.premiumTier ? `Tier ${guild.premiumTier}` : 'None',
           inline: true,
         },
         {
-          name: "Boosts",
+          name: 'Boosts',
           value: `${guild.premiumSubscriptionCount || 0}`,
           inline: true,
         }
@@ -47,12 +48,12 @@ export async function execute(interaction) {
       .setImage(guild.bannerURL({ dynamic: true }) || null)
       .setTimestamp()
       .setFooter({
-        text: "Server Info",
+        text: 'Server Info',
         iconURL: guild.iconURL({ dynamic: true }),
       });
 
     await interaction.editReply({ embeds: [embed], ephemeral: true });
   } catch (error) {
-    console.error(error);
+    logger.error('Error in server-info command:', error);
   }
 }
