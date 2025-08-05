@@ -1,11 +1,12 @@
-import { SlashCommandBuilder } from "discord.js";
+import { SlashCommandBuilder } from 'discord.js';
+import logger from '../../utils/logger.js';
 
 export const data = new SlashCommandBuilder()
-  .setName("avatar")
-  .setDescription("Get the avatar of your own avatar or another user.")
-  .addUserOption((option) =>
+  .setName('avatar')
+  .setDescription('Get the avatar of your own avatar or another user.')
+  .addUserOption(option =>
     option
-      .setName("user")
+      .setName('user')
       .setDescription("The user's avatar to show. (optional)")
   );
 
@@ -14,7 +15,7 @@ export async function execute(interaction) {
     await interaction.deferReply({ ephemeral: true });
 
     const { user, options } = interaction;
-    const pickedUser = options.getUser("user");
+    const pickedUser = options.getUser('user');
 
     if (pickedUser) {
       await interaction.editReply({
@@ -32,6 +33,6 @@ export async function execute(interaction) {
       });
     }
   } catch (error) {
-    console.error(error);
+    logger.error('Error in avatar command:', error);
   }
 }
