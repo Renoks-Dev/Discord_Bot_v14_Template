@@ -1,8 +1,9 @@
-import dotenv from "dotenv";
-import { REST, Routes } from "discord.js";
-import { readdirSync } from "fs";
-import { join, dirname } from "path";
-import { fileURLToPath, pathToFileURL } from "url";
+import dotenv from 'dotenv';
+import { REST, Routes } from 'discord.js';
+import { readdirSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
+import logger from './utils/logger.js';
 
 dotenv.config();
 
@@ -11,25 +12,25 @@ const __dirname = dirname(__filename);
 
 const commands = [];
 // Grab all the command folders from the commands directory you created earlier
-const foldersPath = join(__dirname, "commands");
+const foldersPath = join(__dirname, 'commands');
 const commandFolders = readdirSync(foldersPath);
 
 for (const folder of commandFolders) {
   // Grab all the command files from the commands directory you created earlier
   const commandsPath = join(foldersPath, folder);
-  const commandFiles = readdirSync(commandsPath).filter((file) =>
-    file.endsWith(".js")
+  const commandFiles = readdirSync(commandsPath).filter(file =>
+    file.endsWith('.js')
   );
   // Grab the SlashCommandBuilder#toJSON() output of each command's data for deployment
   for (const file of commandFiles) {
     const filePath = join(commandsPath, file);
     const fileUrl = pathToFileURL(filePath).href;
     const command = await import(fileUrl);
-    if ("data" in command && "execute" in command) {
+    if ('data' in command && 'execute' in command) {
       commands.push(command.data.toJSON());
     } else {
-      console.warn(
-        `[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`
+      logger.warn(
+        `The command at ${filePath} is missing a required "data" or "execute" property.`
       );
     }
   }
@@ -41,7 +42,7 @@ const rest = new REST().setToken(process.env.TOKEN);
 // and deploy your commands!
 (async () => {
   try {
-    console.log(
+    logger.info(
       `Started refreshing ${commands.length} application (/) commands.`
     );
 
@@ -54,11 +55,11 @@ const rest = new REST().setToken(process.env.TOKEN);
       { body: commands }
     );
 
-    console.log(
+    logger.info(
       `Successfully reloaded ${data.length} application (/) commands.`
     );
   } catch (error) {
     // And of course, make sure you catch and log any errors!
-    console.error(error);
+    logger.error('Failed to deploy commands to guild:', error);
   }
 })();
