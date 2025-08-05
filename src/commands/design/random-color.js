@@ -1,4 +1,5 @@
-import { SlashCommandBuilder, EmbedBuilder } from "discord.js";
+import { SlashCommandBuilder, EmbedBuilder } from 'discord.js';
+import logger from '../../utils/logger.js';
 
 function hexToRgb(hex) {
   const bigint = parseInt(hex.slice(1), 16);
@@ -44,15 +45,15 @@ function hexToHsl(hex) {
 }
 
 export const data = new SlashCommandBuilder()
-  .setName("randomcolor")
-  .setDescription("Generate a random color.");
+  .setName('randomcolor')
+  .setDescription('Generate a random color.');
 
 export async function execute(interaction) {
   try {
     await interaction.deferReply({ ephemeral: true });
 
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    const hexColor = `#${randomColor.padStart(6, "0")}`;
+    const hexColor = `#${randomColor.padStart(6, '0')}`;
 
     const rgbColor = hexToRgb(hexColor);
     const hslColor = hexToHsl(hexColor);
@@ -61,13 +62,13 @@ export async function execute(interaction) {
       .setColor(hexColor)
       .setTitle("Here's your random color!")
       .setFields([
-        { name: "RGB", value: `\`${rgbColor}\`` },
-        { name: "HEX", value: `\`${hexColor}\`` },
-        { name: "HSL", value: `\`${hslColor}\`` },
+        { name: 'RGB', value: `\`${rgbColor}\`` },
+        { name: 'HEX', value: `\`${hexColor}\`` },
+        { name: 'HSL', value: `\`${hslColor}\`` },
       ]);
 
     await interaction.editReply({ embeds: [embed], ephemeral: true });
   } catch (error) {
-    console.error(error);
+    logger.error('Error in random-color command:', error);
   }
 }
